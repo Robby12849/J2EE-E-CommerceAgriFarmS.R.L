@@ -139,7 +139,8 @@
         <td>${strumento.potenza}</td>
         <td>${strumento.costo}</td>
         <td><img src='${strumento.linkfoto}' width=10% /></td>
-        <td><a href="insertpagapp?id_strumento=${strumento.id_strumento}">Acquista</a></td>
+        <td><a href="#" onclick="inserisci('${strumento.id_strumento}'); return false;">Acquista</a></td>
+
     </tr>
 </c:forEach>
                     </thead>
@@ -238,6 +239,7 @@
     <script src="assets/js/TweenMax.min.js"></script>
     <script src="assets/js/validnavs.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/carrellofetch.js"></script>
 
 </body>
 </html>

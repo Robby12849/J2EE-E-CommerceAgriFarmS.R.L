@@ -1,6 +1,7 @@
 package debari.muscatelli.webapp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -36,6 +37,9 @@ public class AcquistaInsert extends HttpServlet {
 		DaoAccessCarrello dao1=new DaoAccessCarrello();
 		dao.InserisciAcquistiDaCarrello();
 		dao1.EliminaTutto();
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('Acquito effettuato con successo!')</script>");
 		response.sendRedirect("visualacquisti");
 	}
 

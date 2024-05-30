@@ -36,8 +36,7 @@ public class SumCosto extends HttpServlet {
 		int id = Integer.parseInt(id1);
 		DaoAccessCarrello carrello= new DaoAccessCarrello();
 		int somma=carrello.SommaTotale(id);
-		HttpSession session1=request.getSession();
-		session1.setAttribute("somma", somma);
+		session.setAttribute("somma", somma);
 		response.sendRedirect("carrello.jsp");
 	}
 

@@ -1,6 +1,7 @@
 package debari.muscatelli.webapp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,14 +34,21 @@ public class VisualizzaCarrello extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session=request.getSession();
+	    
 	    Integer userid = (Integer)session.getAttribute("userid");
-		DaoAccessCarrello dao = new DaoAccessCarrello(); 
+	    DaoAccessCarrello dao = new DaoAccessCarrello(); 
+	    response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+	    if(userid!=0) {
 	    List<Carrello> carrello = dao.VediTuttiOgg(userid);
 	    int sum=dao.SommaTotale(userid);
 	    session.setAttribute("carrello", carrello);
 	    session.setAttribute("userid", userid);
 	    session.setAttribute("sum", sum);
 	    response.sendRedirect("carrello.jsp");
+	    } else {
+			out.println("<script>alert('Fai Login!!');window.location.href='login.jsp';</script>");	    	
+	    }
 	}
 
 	/**

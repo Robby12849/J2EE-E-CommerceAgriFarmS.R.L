@@ -1,6 +1,8 @@
 package debari.muscatelli.webapp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +34,9 @@ public class EliminaOggettoCarrello extends HttpServlet {
 		int id=Integer.parseInt(id1);
 		DaoAccessCarrello carr=new DaoAccessCarrello();
 		carr.EliminaOgg(id);
-		response.sendRedirect("carrello.jsp");
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('Elemento eliminato con successo!');window.location.href='visualizzacarrello';</script>");
 	}
 
 	/**

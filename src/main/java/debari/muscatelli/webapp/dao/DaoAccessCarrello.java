@@ -26,6 +26,30 @@ public class DaoAccessCarrello {
 			+ "GROUP BY utente.id_utente, utente.username" ;
 	final String DELETEELEMENTO="DELETE FROM carrello where id_oggetto = ?";
 	final String DELETECARR="DELETE FROM carrello";
+	final String INSERTCARRWUT="INSERT INTO carrello(id_strumento) VALUES(?)";
+	final String UPDUTENTE="UPDATE carrello SET id_utente = ? WHERE id_utente IS NULL ";
+	final String MAXCARR="select MAX(id_oggetto) as max_id from carrello";
+	
+	public void UpdateCarrello(int userId) {
+		conn=connessione();
+		 PreparedStatement maxIdStatement;
+		try {
+			maxIdStatement = conn.prepareStatement(MAXCARR);
+			ResultSet resultSet = maxIdStatement.executeQuery();
+         int maxId = 0;
+         if (resultSet.next()) {
+             maxId = resultSet.getInt("max_id");
+         }
+         PreparedStatement updateStatement = conn.prepareStatement(UPDUTENTE);
+         for (int i = 1; i <= maxId; i++) {
+             updateStatement.setInt(1, userId);
+             updateStatement.executeUpdate();
+         }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Connection connessione() {
 		try {
 	        conn = DriverManager.getConnection(URL, USER, PSSW);	
@@ -41,6 +65,16 @@ public class DaoAccessCarrello {
 			PreparedStatement ps=conn.prepareStatement(INSERTCARR);
 			ps.setInt(1, id_ut);
 			ps.setInt(2, id_str);
+		ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	public void InserisciStr(int id_str) {
+		conn=connessione();
+		try {
+			PreparedStatement ps=conn.prepareStatement(INSERTCARRWUT);
+			ps.setInt(1, id_str);
 		ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

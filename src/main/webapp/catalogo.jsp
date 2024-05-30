@@ -76,8 +76,6 @@
 
 
 <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
-    <li class="dropdown"><a href="index.html">Home</a></li>
-    <li class="dropdown"><a href="catalogo.jsp">Catalogo</a></li>
     <li class="dropdown"><a href="visualallogg">Catalogo completo</a></li>
     <li class="dropdown"><a href="orariap.jsp">Orari apertura</a></li>
     <li class="dropdown"><a href="login.jsp">Storico Ordini</a></li>

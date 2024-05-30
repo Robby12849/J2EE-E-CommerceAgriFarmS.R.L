@@ -38,8 +38,7 @@ public class VisualAcquisti extends HttpServlet {
 		Integer id1 = (Integer) session.getAttribute("userid");
 		DaoAccessAcquisti dao = new DaoAccessAcquisti(); 
 	    List<Acquisto> acquisti = dao.SelectPersAcq(id1);
-	    HttpSession session1 = request.getSession();
-	    session1.setAttribute("acquisti", acquisti);
+	    session.setAttribute("acquisti", acquisti);
 	    response.sendRedirect("acquisti.jsp");
 	}
 
