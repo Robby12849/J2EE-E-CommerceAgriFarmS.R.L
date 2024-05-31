@@ -34,11 +34,6 @@ public class ValidateLogin extends HttpServlet {
 		HttpSession session=request.getSession();
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-		String id = (String)session.getAttribute("id_strumento");
-		int idStrumento=0;
-		if (id!=null) {
-		idStrumento = Integer.parseInt(id);
-		}
 		int userid=0;
 		DaoAccessUtenti dao=new DaoAccessUtenti();
 		DaoAccessAccessi dao1=new DaoAccessAccessi();
@@ -49,12 +44,9 @@ public class ValidateLogin extends HttpServlet {
 			userid=dao.FoundId(username, password);		
 			session.setAttribute("userid", userid);
 			request.getRequestDispatcher("postregistrazione.jsp").forward(request, response);
-			if(idStrumento!=0 ) {
-			dao2.InserisciCarr(idStrumento, userid);
-			}
+			dao2.UpdateCarrello(userid);
 		}
 		else {
-			
 			response.sendRedirect("oggetti.jsp");
 		}
 

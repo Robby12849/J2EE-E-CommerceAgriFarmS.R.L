@@ -33,22 +33,29 @@ public class VisualizzaCarrello extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    HttpSession session=request.getSession();
-	    
-	    Integer userid = (Integer)session.getAttribute("userid");
-	    DaoAccessCarrello dao = new DaoAccessCarrello(); 
-	    response.setContentType("text/html");
+		HttpSession session = request.getSession();
+		Integer userid = (Integer) session.getAttribute("userid"); // Changed type to Integer
+
+		DaoAccessCarrello dao = new DaoAccessCarrello(); 
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-	    if(userid!=0) {
-	    List<Carrello> carrello = dao.VediTuttiOgg(userid);
-	    int sum=dao.SommaTotale(userid);
-	    session.setAttribute("carrello", carrello);
-	    session.setAttribute("userid", userid);
-	    session.setAttribute("sum", sum);
-	    response.sendRedirect("carrello.jsp");
-	    } else {
-			out.println("<script>alert('Fai Login!!');window.location.href='login.jsp';</script>");	    	
-	    }
+		try {
+		    if (userid != null) { 
+		        List<Carrello> carrello = dao.VediTuttiOgg(userid.intValue()); 
+		        int sum = dao.SommaTotale(userid.intValue()); 
+		        session.setAttribute("carrello", carrello);
+		        session.setAttribute("userid", userid);
+		        session.setAttribute("sum", sum);
+		        response.sendRedirect("carrello.jsp");
+		    } else {
+		        out.println("<script>alert('Fai Login!!');window.location.href='login.jsp';</script>");
+		    }
+		} catch (Exception e) {
+		   
+		    e.printStackTrace(); 
+		    
+		}
+
 	}
 
 	/**

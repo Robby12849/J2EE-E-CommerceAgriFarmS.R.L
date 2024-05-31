@@ -33,10 +33,20 @@ public class AcquistaInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession();
+		String id = (String)session.getAttribute("id_utente");
+		int idInt=0;
+		if(id != null) {
+		idInt = Integer.parseInt(id);
+		}
+		else {
+			response.sendRedirect("login.jsp");
+		}
 		DaoAccessAcquisti dao=new DaoAccessAcquisti();
 		DaoAccessCarrello dao1=new DaoAccessCarrello();
 		dao.InserisciAcquistiDaCarrello();
 		dao1.EliminaTutto();
+		dao1.UpdateCarrello(idInt);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('Acquito effettuato con successo!')</script>");

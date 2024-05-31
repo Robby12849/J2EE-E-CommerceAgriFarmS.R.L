@@ -1,7 +1,6 @@
 package debari.muscatelli.webapp;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import debari.muscatelli.webapp.dao.DaoAccessCarrello;
 
 
 /**
@@ -30,10 +31,12 @@ public class InsertPagApp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idStrumento = request.getParameter("id_strumento");
+		DaoAccessCarrello dao= new DaoAccessCarrello();
+		String idStrumento1 = request.getParameter("id_strumento");
+		int idStrumento = Integer.parseInt(idStrumento1);
+		dao.InserisciStr(idStrumento);
 		HttpSession session=request.getSession();
         session.setAttribute("id_strumento", idStrumento);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**
