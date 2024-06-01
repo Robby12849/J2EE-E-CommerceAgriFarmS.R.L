@@ -34,7 +34,7 @@ public class VisualizzaCarrello extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Integer userid = (Integer) session.getAttribute("userid"); // Changed type to Integer
+		Integer userid = (Integer) session.getAttribute("userid"); 
 
 		DaoAccessCarrello dao = new DaoAccessCarrello(); 
 		response.setContentType("text/html");

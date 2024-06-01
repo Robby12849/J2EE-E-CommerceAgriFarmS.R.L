@@ -116,9 +116,9 @@
     <div class="login-page">
   <div class="form">
     <form class="login-form" action="validatelogin" method="post">
-      <input type="username" name="username" placeholder="username">
+      <input type="text" name="username" placeholder="username">
       <input type="password" name="password" placeholder="password">
-      <button>login</button>
+      <button>LOGIN</button>
       <p class="message">Non sei registrato? <a href="registrati.jsp">Crea Account</a></p>
     </form>
   </div>
